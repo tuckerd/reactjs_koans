@@ -12,7 +12,7 @@ class GroceryList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      groceries: [ { name: "Apples" } ]
+      groceries: [ { name: "Apples", id: 'ap' } ]
     };
   }
 
@@ -24,18 +24,16 @@ class GroceryList extends React.Component {
     //
     // Below you can see how to pass properties to child components.
     // We have defined a `grocery` property for each `GroceryListItem`.
-    for(var index = 0; index < this.state.groceries.length; index++) {
-      groceriesComponents.push(
-          <GroceryListItem
-            grocery={this.state.groceries[index]}
-          />
-      );
-    }
+    groceriesComponents = this.state.groceries.map(function(grocery) {
+      return <GroceryListItem grocery={grocery} />
+    });
 
     // Hint: Don't forget about putting items into `ul`
     return (
       <div>
-        // Put your code here
+        <ul>
+          {groceriesComponents}
+        </ul>
       </div>
     );
   }
@@ -50,9 +48,7 @@ class GroceryListItem extends React.Component {
 
   render() {
     return (
-        <li>
-          // Put your code here.
-        </li>
+        <li>{this.props.grocery.name}</li>
     );
   }
 }
